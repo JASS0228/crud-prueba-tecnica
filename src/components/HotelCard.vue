@@ -1,21 +1,25 @@
 <script setup lang="ts">
 	import { formatCurrency } from '../helpers/formatCurrency'
+	import { Hotel } from '../types/hotelType'
+
+	//  Se establece las props que recibe el componente HotelCard
+	defineProps<{ hotel: Hotel }>()
 </script>
 
 <template>
 	<article class="bg-white rounded-md shadow-md">
 		<div>
 			<img
-				src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/20/c4/5a/5a/hotel-safi-metropolitan.jpg?w=1200&h=-1&s=1%201x,https://dynamic-media-cdn.tripadvisor.com/media/photo-o/20/c4/5a/5a/hotel-safi-metropolitan.jpg?w=1400&h=-1&s=1%202x"
-				alt=""
+				:src="hotel.image"
+				:alt="hotel.name"
 				class="rounded shadow" />
 		</div>
 		<div class="m-3">
 			<div class="flex items-center justify-between gap-2">
-				<h2 class="text-xl font-bold">Hotel Safi Metropolitan</h2>
+				<h2 class="text-xl font-bold">{{ hotel.name }}</h2>
 				<div class="flex">
 					<svg
-						v-for="i in 5"
+						v-for="i in +hotel.rating"
 						:key="i"
 						xmlns="http://www.w3.org/2000/svg"
 						class="h-5 w-5 text-yellow-500"
@@ -29,18 +33,15 @@
 				</div>
 			</div>
 			<div>
-				<p class="text-gray-500">Apodaca Nuevo leon</p>
+				<p class="text-gray-500">{{ hotel.city }}</p>
 
 				<p class="truncate mt-2">
-					Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi
-					deserunt libero ab corporis illum dolore aliquam eaque sed dolores
-					facilis et fuga repudiandae, ipsam itaque minima quia laboriosam.
-					Maxime, quasi.
+					{{ hotel.description }}
 				</p>
 			</div>
 			<div class="flex justify-end items-center gap-1 mt-7">
 				<p class="border-b-2 border-black font-semibold">
-					{{ formatCurrency(1500) }} USD
+					{{ formatCurrency(+hotel.rate) }} {{ hotel.currency }}
 				</p>
 			</div>
 		</div>
