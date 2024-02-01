@@ -7,7 +7,7 @@
 	<header class="bg-white p-5 shadow-md mb-5">
 		<NavBar />
 	</header>
-	<main>
+	<main class="container">
 		<RouterView />
 	</main>
 </template>
