@@ -3,12 +3,13 @@
 	import { useGetHotel } from '../composables/useHotelQuery'
 	import { formatCurrency } from '../helpers/formatCurrency'
 	import { RouterLink } from 'vue-router'
+	import Spinner from '../components/Spinner.vue'
+
+	// Se instancia para obtener la información de toda la ruta
 	const route = useRoute()
 
-	console.log(route.params.id)
-
+	// Se obtiene la data del hotel del id y su estado de carga
 	const { data, isLoading, isError, error } = useGetHotel(+route.params.id)
-	console.log(data.value)
 </script>
 
 <template>
