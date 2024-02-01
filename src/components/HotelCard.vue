@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+	import { formatCurrency } from '../helpers/formatCurrency'
+</script>
 
 <template>
 	<article class="bg-white rounded-md shadow-md">
@@ -37,8 +39,9 @@
 				</p>
 			</div>
 			<div class="flex justify-end items-center gap-1 mt-7">
-				<p class="border-r-2 border-black pr-2">3000</p>
-				<p>USD</p>
+				<p class="border-b-2 border-black font-semibold">
+					{{ formatCurrency(1500) }} USD
+				</p>
 			</div>
 		</div>
 	</article>
