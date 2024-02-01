@@ -1,14 +1,18 @@
 import { useQuery } from '@tanstack/vue-query'
-import axios from 'axios'
+import { getHotels } from '../api'
+import { Hotels } from '../types/hotelType'
 
-const getHotels = () => {
+const useGetHotels = () => {
 	return useQuery({
 		queryKey: ['hotels'],
 		queryFn: async () => {
-			const res = await axios.get('https://test.devmx.site/api/hotels')
-			return res
+			const res = await getHotels()
+			return res.data
+		},
+		select(data): Hotels {
+			return data
 		},
 	})
 }
 
-export { getHotels }
+export { useGetHotels }
