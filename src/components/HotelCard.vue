@@ -35,7 +35,7 @@
 			<div>
 				<p class="text-gray-500">{{ hotel.city }}</p>
 
-				<p class="truncate mt-2">
+				<p class="line-clamp-2 mt-2">
 					{{ hotel.description }}
 				</p>
 			</div>
