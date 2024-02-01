@@ -9,16 +9,16 @@
 			<li>
 				<RouterLink
 					:to="{ name: 'Hotels' }"
-					class="text-4xl font-bold text-gray-800 hover:text-gray-500 transition-all"
-					exact-active-class="underline text-gray-500"
+					class="text-2xl font-bold text-gray-800 hover:text-gray-400 transition-all"
+					exact-active-class="underline text-gray-400"
 					>Hotels</RouterLink
 				>
 			</li>
 			<li>
 				<RouterLink
 					:to="{ name: 'crear-hotel' }"
-					class="text-4xl font-semibold text-gray-600 hover:text-gray-500 transition-all"
-					exact-active-class="underline text-gray-500"
+					class="text-2xl font-semibold text-gray-800 hover:text-gray-400 transition-all"
+					exact-active-class="underline text-gray-400"
 					>Crear Hotel</RouterLink
 				>
 			</li>
