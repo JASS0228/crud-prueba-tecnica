@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/vue-query'
-import { getHotels } from '../api'
-import { Hotels } from '../types/hotelType'
+import { getHotel, getHotels } from '../api'
+import { Hotels, Hotel } from '../types/hotelType'
 
 // Este hook es para obtener los hoteles de la API con axios y vue-query
 const useGetHotels = () => {
@@ -10,10 +10,24 @@ const useGetHotels = () => {
 			const res = await getHotels()
 			return res.data
 		},
-		select(data): Hotels {
+		select(data: Hotels): Hotels {
 			return data
 		},
 	})
 }
 
-export { useGetHotels }
+// Este hook es para obtener un hotel de la API con axios y vue-query
+const useGetHotel = (id: number) => {
+	return useQuery({
+		queryKey: ['hotel', id],
+		queryFn: async () => {
+			const res = await getHotel(id)
+			return res.data
+		},
+		select(data) {
+			return data.data
+		},
+	})
+}
+
+export { useGetHotels, useGetHotel }
