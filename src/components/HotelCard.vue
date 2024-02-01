@@ -9,10 +9,22 @@
 				class="rounded shadow" />
 		</div>
 		<div class="m-3">
-			<div class="flex items-center justify-between">
-				<h2 class="text-2xl font-bold">Hotel Safi Metropolitan</h2>
-				<!-- Todo agregar icono -->
-				<p class="text-gray-500">Rate</p>
+			<div class="flex items-center justify-between gap-2">
+				<h2 class="text-xl font-bold">Hotel Safi Metropolitan</h2>
+				<div class="flex">
+					<svg
+						v-for="i in 5"
+						:key="i"
+						xmlns="http://www.w3.org/2000/svg"
+						class="h-5 w-5 text-yellow-500"
+						viewBox="0 0 20 20"
+						fill="currentColor">
+						<path
+							fill-rule="evenodd"
+							d="M10 3.293l2.146 4.612 4.826.702-3.5 3.407.826 4.818L10 14.159l-4.299 2.772.826-4.818-3.5-3.407 4.826-.702L10 3.293z"
+							clip-rule="evenodd" />
+					</svg>
+				</div>
 			</div>
 			<div>
 				<p class="text-gray-500">Apodaca Nuevo leon</p>
