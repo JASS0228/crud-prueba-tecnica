@@ -9,7 +9,7 @@
 		</h1>
 	</div>
 
-	<section class="grid grid-cols-2 gap-14 m-10 md:grid-cols-4">
+	<section class="grid grid-cols-1 gap-14 m-10 md:grid-cols-3 2xl:grid-cols-4">
 		<HotelCard
 			v-for="hotel in 20"
 			:key="hotel" />
