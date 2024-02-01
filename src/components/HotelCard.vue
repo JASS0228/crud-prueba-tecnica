@@ -4,6 +4,11 @@
 
 	//  Se establece las props que recibe el componente HotelCard
 	defineProps<{ hotel: Hotel }>()
+
+	//Se declaro un emit para borrar un hotel
+	const emits = defineEmits<{
+		(e: 'delete-hotel', id: number, name: string): void
+	}>()
 </script>
 
 <template>
@@ -43,6 +48,23 @@
 				<p class="border-b-2 border-black font-semibold">
 					{{ formatCurrency(+hotel.rate) }} {{ hotel.currency }}
 				</p>
+			</div>
+			<div class="flex flex-row gap-2">
+				<RouterLink
+					:to="{ name: 'hotel', params: { id: hotel.id } }"
+					class="text-white bg-teal-600 block text-center md:inline-block p-3 w-full rounded-xl hover:bg-teal-500 transition-colors font-bold text-lg mt-3">
+					Actualizar
+				</RouterLink>
+				<RouterLink
+					:to="{ name: 'hotel', params: { id: hotel.id } }"
+					class="text-white bg-blue-600 block text-center md:inline-block p-3 w-full rounded-xl hover:bg-blue-500 transition-colors font-bold text-lg mt-3">
+					Ver más
+				</RouterLink>
+				<button
+					@click="emits('delete-hotel', hotel.id, hotel.name)"
+					class="text-white bg-red-600 block text-center md:inline-block p-3 w-full rounded-xl hover:bg-red-500 transition-colors font-bold text-lg mt-3">
+					Borrar
+				</button>
 			</div>
 		</div>
 	</article>
