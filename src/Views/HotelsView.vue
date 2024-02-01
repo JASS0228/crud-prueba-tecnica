@@ -1,11 +1,10 @@
 <script setup lang="ts">
 	import HotelCard from '../components/HotelCard.vue'
 	import Spinner from '../components/Spinner.vue'
-	import { getHotels } from '../composables/useHotelQuery'
+	import { useGetHotels } from '../composables/useHotelQuery'
 
-	const { data, isLoading } = getHotels()
-	console.log(data.value?.data)
-	console.log(isLoading.value)
+	// Se obtiene la data de los hoteles y el estado de carga
+	const { data, isLoading } = useGetHotels()
 </script>
 
 <template>
@@ -15,15 +14,19 @@
 		</h1>
 	</div>
 
+	<!-- Se muestra el spinner mientras se carga la data -->
 	<div v-if="isLoading">
 		<Spinner />
 	</div>
+	<!-- Si se cargo se muestra el contenido -->
 	<div v-else>
 		<section
 			class="grid grid-cols-1 gap-14 m-10 md:grid-cols-3 2xl:grid-cols-4">
+			<!-- Se itera el data para obtener los hoteles -->
 			<HotelCard
-				v-for="hotel in data?.data.data"
-				:key="hotel" />
+				v-for="hotel of data?.data"
+				:key="hotel.id"
+				:hotel="hotel" />
 		</section>
 	</div>
 </template>
