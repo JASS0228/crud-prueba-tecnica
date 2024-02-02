@@ -1,5 +1,5 @@
 import hotelsApi from '../Config'
-import { Hotel, HotelByID, HotelCreate, Hotels } from '../types/hotelType'
+import { HotelByID, HotelCreate } from '../types/hotelType'
 
 // Obtiene todo los hoteles de la APi
 const getHotels = async () => {
@@ -24,4 +24,4 @@ const deleteHotelById = async (id: number) => {
 	return await hotelsApi.delete(`/hotels/${id}`)
 }
 
-export { getHotels, getHotel, deleteHotelById }
+export { getHotels, getHotel, deleteHotelById, createHotel }
