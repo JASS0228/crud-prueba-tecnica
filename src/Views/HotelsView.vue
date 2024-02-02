@@ -2,13 +2,15 @@
 	import HotelCard from '../components/HotelCard.vue'
 	import Spinner from '../components/Spinner.vue'
 	import Swal from 'sweetalert2'
-	import {
-		useDeleteHotelById,
-		useGetHotels,
-	} from '../composables/useHotelQuery'
+	import { useDeleteHotelById } from '../composables/useHotelQuery'
+	import { onMounted } from 'vue'
+	import { useHotelStore } from '../store/hotel'
 
-	// Se obtiene la data de los hoteles y el estado de carga
-	const { data, isLoading } = useGetHotels()
+	const hotelStore = useHotelStore()
+
+	onMounted(async () => {
+		await hotelStore.fetchHotels()
+	})
 
 	// Se obtiene la función para eliminar un hotel
 	const { mutate } = useDeleteHotelById()
@@ -28,6 +30,11 @@
 			if (result.isConfirmed) {
 				mutate(id)
 				Swal.fire('¡Eliminado!', `${name} ha sido eliminado.`, 'success')
+				if (hotelStore.hotels?.data) {
+					hotelStore.hotels!.data = hotelStore.hotels?.data.filter(
+						(hotel) => hotel.id !== id
+					)
+				}
 			}
 		})
 	}
@@ -41,7 +48,7 @@
 	</div>
 
 	<!-- Se muestra el spinner mientras se carga la data -->
-	<div v-if="isLoading">
+	<div v-if="hotelStore.isLoading">
 		<Spinner />
 	</div>
 	<!-- Si se cargo se muestra el contenido -->
@@ -50,7 +57,7 @@
 			class="grid grid-cols-1 gap-14 m-10 md:grid-cols-3 2xl:grid-cols-4">
 			<!-- Se itera el data para obtener los hoteles -->
 			<HotelCard
-				v-for="hotel of data"
+				v-for="hotel of hotelStore.hotels?.data"
 				:key="hotel.id"
 				:hotel="hotel"
 				@delete-hotel="deleteHotel" />
