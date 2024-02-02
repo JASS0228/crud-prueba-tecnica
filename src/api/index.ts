@@ -1,5 +1,5 @@
 import hotelsApi from '../Config'
-import { Hotel, HotelByID, Hotels } from '../types/hotelType'
+import { Hotel, HotelByID, HotelCreate, Hotels } from '../types/hotelType'
 
 // Obtiene todo los hoteles de la APi
 const getHotels = async () => {
@@ -9,6 +9,14 @@ const getHotels = async () => {
 // Obtiene un hotel de la API por su id
 const getHotel = async (id: number) => {
 	return await hotelsApi.get<HotelByID>(`/hotels/${id}`)
+}
+
+const createHotel = async (hotel: HotelCreate) => {
+	return await hotelsApi.post('/hotels', hotel, {
+		headers: {
+			'Content-Type': 'multipart/form-data',
+		},
+	})
 }
 
 // Elimina un hotel de la API por su id
