@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/vue-query'
-import { deleteHotelById, getHotel, getHotels } from '../api'
-import { Hotels, Hotel } from '../types/hotelType'
+import { deleteHotelById, getHotel, getHotels, createHotel } from '../api'
+import { Hotels, Hotel, HotelCreate } from '../types/hotelType'
 
 // Este hook es para obtener los hoteles de la API con axios y vue-query
 const useGetHotels = () => {
@@ -31,7 +31,19 @@ const useGetHotel = (id: number) => {
 }
 
 //Este hook sirve para crear un hotel en la API con axios y vue-query
-const useCreateHotel = () => {}
+const useCreateHotel = () => {
+	return useMutation({
+		mutationKey: ['createHotel'],
+		mutationFn: async (hotel: HotelCreate) => {
+			const res = await createHotel(hotel)
+			return res.data
+		},
+		onError(error) {
+			//TODO Cambiar
+			return error
+		},
+	})
+}
 
 //Este hook sirve para eliminar un hotel de la API con axios y vue-query
 const useDeleteHotelById = () => {
@@ -44,4 +56,4 @@ const useDeleteHotelById = () => {
 	})
 }
 
-export { useGetHotels, useGetHotel, useDeleteHotelById }
+export { useGetHotels, useGetHotel, useDeleteHotelById, useCreateHotel }
