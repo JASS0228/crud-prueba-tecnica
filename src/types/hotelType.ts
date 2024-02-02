@@ -8,7 +8,17 @@ export interface HotelByID {
 
 export interface Hotel {
 	id: number
-	image?: string
+	image: string
+	name: string
+	city: string
+	rate: string
+	rating: string
+	currency: string
+	description: string
+}
+
+export type HotelCreate = {
+	image: string
 	name: string
 	city: string
 	rate: string
