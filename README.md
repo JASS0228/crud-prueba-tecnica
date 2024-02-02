@@ -6,6 +6,12 @@ Para instalar las dependencias del proyecto, ejecutar el siguiente comando:
 npm install
 ```
 
+Para correr el proyecto, ejecutar el siguiente comando:
+
+```bash
+npm start
+```
+
 ## Descripción
 
 Las vistas para hoteles se ve de esta manera
