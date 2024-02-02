@@ -10,8 +10,8 @@ const useGetHotels = () => {
 			const res = await getHotels()
 			return res.data
 		},
-		select(data: Hotels): Hotels {
-			return data
+		select(data: Hotels): Hotel[] {
+			return data.data
 		},
 	})
 }
@@ -29,6 +29,9 @@ const useGetHotel = (id: number) => {
 		},
 	})
 }
+
+//Este hook sirve para crear un hotel en la API con axios y vue-query
+const useCreateHotel = () => {}
 
 //Este hook sirve para eliminar un hotel de la API con axios y vue-query
 const useDeleteHotelById = () => {
