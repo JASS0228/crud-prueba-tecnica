@@ -17,6 +17,7 @@
 	const { mutate } = useDeleteHotelById()
 
 	// Función para eliminar un hotel con SweetAlert para confirmar si va borrar o no
+	//Muestra un mensaje de confirmación
 	function deleteHotel(id: number, name: string): void {
 		Swal.fire({
 			title: '¿Estás seguro?',
