@@ -17,7 +17,7 @@ const createHotel = async (hotel: HotelCreate) => {
 }
 
 // Actualiza un hotel de la API por su id
-const updateHotel = async (id: number, hotel: Hotel) => {
+const updateHotel = async (id: number, hotel: Hotel): Promise<HotelByID> => {
 	return await hotelsApi.put(`/hotels/${id}`, hotel)
 }
 
