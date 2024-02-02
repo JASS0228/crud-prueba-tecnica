@@ -1,26 +1,34 @@
 <script setup lang="ts">
 	import HotelCard from '../components/HotelCard.vue'
 	import Spinner from '../components/Spinner.vue'
+	import Swal from 'sweetalert2'
 	import {
 		useDeleteHotelById,
 		useGetHotels,
 	} from '../composables/useHotelQuery'
-	import Swal from 'sweetalert2'
 
 	// Se obtiene la data de los hoteles y el estado de carga
 	const { data, isLoading } = useGetHotels()
 
+	// Se obtiene la función para eliminar un hotel
 	const { mutate } = useDeleteHotelById()
 
+	// Función para eliminar un hotel con SweetAlert para confirmar si va borrar o no
 	function deleteHotel(id: number, name: string): void {
 		Swal.fire({
 			title: '¿Estás seguro?',
-			text: `Estas seguro de borrar el hotel con el nombre ${name}`,
+			text: `¡No podrás revertir esto!`,
 			icon: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: '#3085d6',
 			cancelButtonColor: '#d33',
-			confirmButtonText: 'Sí, borrarlo',
+			confirmButtonText: 'Sí, bórralo',
+			cancelButtonText: 'Cancelar',
+		}).then((result) => {
+			if (result.isConfirmed) {
+				mutate(id)
+				Swal.fire('¡Eliminado!', `${name} ha sido eliminado.`, 'success')
+			}
 		})
 	}
 </script>
@@ -42,7 +50,7 @@
 			class="grid grid-cols-1 gap-14 m-10 md:grid-cols-3 2xl:grid-cols-4">
 			<!-- Se itera el data para obtener los hoteles -->
 			<HotelCard
-				v-for="hotel of data?.data"
+				v-for="hotel of data"
 				:key="hotel.id"
 				:hotel="hotel"
 				@delete-hotel="deleteHotel" />
