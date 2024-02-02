@@ -1,7 +1,8 @@
 <script setup lang="ts">
 	import { ref } from 'vue'
 
-	const file = ref('')
+	//Tipa de dato para el archivo
+	const file = ref<File>()
 	const name = ref('')
 	const city = ref('')
 	const rate = ref('')
@@ -20,12 +21,24 @@
 	const handleFileChange = (e: Event) => {
 		const target = e.target as HTMLInputElement
 		if (target.files) {
-			console.log(target.files[0])
+			file.value = target.files[0]
 		}
 	}
 
 	const handleSubmit = () => {
 		//Validar que la imagen sea un archivo
+		if (!file.value) {
+			error.value = 'La imagen es requerida'
+			resetAlert()
+			return
+		}
+
+		//Validar que se una imagen con extensión jpg, jpeg o png
+		if (!/\.(jpg|jpeg|png)$/.test(file.value.name)) {
+			error.value = 'La imagen debe ser de tipo jpg, jpeg o png'
+			resetAlert()
+			return
+		}
 
 		// Validar que todos los campos estén llenos
 		if (
