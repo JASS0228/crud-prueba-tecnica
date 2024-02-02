@@ -2,6 +2,8 @@
 	import { computed, reactive } from 'vue'
 	import { useGetHotel, useUpdateHotel } from '../composables/useHotelQuery'
 	import { useRouter, useRoute } from 'vue-router'
+	import Spinner from '../components/Spinner.vue'
+	import Alert from '../components/Alert.vue'
 
 	const router = useRouter()
 	const route = useRoute()
@@ -21,11 +23,10 @@
 		type: false,
 	})
 
-	const { data } = useGetHotel(+route.params.id)
-	console.log(data.value)
+	const { data, isLoading } = useGetHotel(+route.params.id)
 	Object.assign(hotel, data.value)
 
-	const { mutate } = useUpdateHotel()
+	const { mutateAsync } = useUpdateHotel()
 
 	//Función para resetear la alerta
 	const resetAlert = () => {
@@ -95,7 +96,7 @@
 		}
 
 		// Enviar la datos a la api
-		mutate({
+		mutateAsync({
 			id: +route.params.id,
 			name,
 			city,
@@ -105,6 +106,9 @@
 			description,
 			image,
 		})
+
+		alert.message = 'Hotel modificado correctamente'
+		alert.type = false
 
 		resetAlert()
 
@@ -119,7 +123,10 @@
 			image: '',
 		})
 
-		router.push({ name: 'Hotels' })
+		// Redirigir a la lista de hoteles
+		setTimeout(() => {
+			router.push({ name: 'Hotels' })
+		}, 2000)
 	}
 </script>
 
@@ -127,19 +134,16 @@
 	<div class="flex flex-col items-center justify-center">
 		<h1 class="text-3xl md:text-4xl font-bold text-center">Modificar Hotel</h1>
 
-		<div
-			v-if="alert.message"
-			:class="`${
-				alert.type
-					? 'bg-red-100 border-red-500 text-red-700'
-					: 'bg-green-100 border-green-500 text-green-700'
-			} border-l-4 b p-4 mt-5 w-full md:w-1/3`"
-			role="alert">
-			<p class="font-bold">Error</p>
-			<p>{{ alert.message }}</p>
+		<Alert
+			:message="alert.message"
+			:type="alert.type" />
+
+		<div v-if="isLoading">
+			<Spinner />
 		</div>
 
 		<form
+			v-else
 			action=""
 			class="p-10 bg-white rounded-lg shadow-lg mt-3 w-full md:w-1/3"
 			@submit.prevent="handleSubmit()">
