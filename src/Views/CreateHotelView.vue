@@ -26,6 +26,7 @@
 	}
 
 	const handleSubmit = () => {
+		const formData = new FormData()
 		//Validar que la imagen sea un archivo
 		if (!file.value) {
 			error.value = 'La imagen es requerida'
@@ -74,6 +75,15 @@
 			resetAlert()
 			return
 		}
+
+		// Agregar los datos al formData
+		formData.append('image', file.value)
+		formData.append('name', name.value)
+		formData.append('city', city.value)
+		formData.append('rate', rate.value)
+		formData.append('rating', rating.value)
+		formData.append('currency', currency.value)
+		formData.append('description', description.value)
 
 		// Enviar la datos a la api
 	}
