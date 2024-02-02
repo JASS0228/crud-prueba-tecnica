@@ -100,7 +100,7 @@
 			image,
 		})
 
-		alert.message = 'Hotel modificado correctamente'
+		alert.message = 'Hotel creado correctamente esperando redirección...'
 		alert.type = false
 
 		resetAlert()
@@ -119,7 +119,7 @@
 		// Redirigir a la lista de hoteles
 		setTimeout(() => {
 			router.push({ name: 'Hotels' })
-		}, 2000)
+		}, 1000)
 	}
 </script>
 
