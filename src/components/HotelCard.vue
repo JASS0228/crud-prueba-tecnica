@@ -51,7 +51,7 @@
 			</div>
 			<div class="flex flex-row gap-2">
 				<RouterLink
-					:to="{ name: 'hotel', params: { id: hotel.id } }"
+					:to="{ name: 'update-hotel', params: { id: hotel.id } }"
 					class="text-white bg-teal-600 block text-center md:inline-block p-3 w-full rounded-xl hover:bg-teal-500 transition-colors font-bold text-lg mt-3">
 					Actualizar
 				</RouterLink>
