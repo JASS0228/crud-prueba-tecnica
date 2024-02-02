@@ -12,11 +12,7 @@ const getHotel = async (id: number) => {
 }
 
 const createHotel = async (hotel: HotelCreate) => {
-	return await hotelsApi.post('/hotels', hotel, {
-		headers: {
-			'Content-Type': 'multipart/form-data',
-		},
-	})
+	return await hotelsApi.post('/hotels', hotel)
 }
 
 // Elimina un hotel de la API por su id
